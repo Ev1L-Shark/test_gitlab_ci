@@ -14,11 +14,9 @@ def app():
         db.session.remove()
         db.drop_all()
 
-
 @pytest.fixture
 def client(app):
     return app.test_client()
-
 
 @pytest.fixture
 def setup_data(app):
@@ -30,7 +28,6 @@ def setup_data(app):
     )
     db.session.add(client_obj)
 
-
     parking_obj = Parking(
         address='123 Main St',
         opened=True,
@@ -39,7 +36,6 @@ def setup_data(app):
     )
     db.session.add(parking_obj)
     db.session.commit()
-
 
     log_in = ClientParking(
         client_id=client_obj.id,

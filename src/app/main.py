@@ -11,11 +11,6 @@ def create_app():
 
     db.init_app(app)
 
-
-    # app.config.from_object('config.Config')
-    #
-    # db.init_app(app)
-
     with app.app_context():
         db.create_all()
 
@@ -81,7 +76,6 @@ def create_app():
         elif parking_obj.count_available_places <= 0:
             return jsonify({'error': 'No available places'}), 400
 
-        # Создаем лог въезда
         new_log_in = ClientParking(
             client_id=client.id,
             parking_id=parking_obj.id,

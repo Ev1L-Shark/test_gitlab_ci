@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_get_single_client(client, setup_data):
     client_id = setup_data['client'].id
     response = client.get(f'/clients/{client_id}')
