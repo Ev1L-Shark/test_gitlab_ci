@@ -38,7 +38,10 @@ def create_app():
         car_number = data.get("car_number")
 
         new_client = Client(
-            name=name, surname=surname, credit_card=credit_card, car_number=car_number
+            name=name,
+            surname=surname,
+            credit_card=credit_card,
+            car_number=car_number,
         )
         db.session.add(new_client)
         db.session.commit()
@@ -60,7 +63,10 @@ def create_app():
         )
         db.session.add(new_parking)
         db.session.commit()
-        return jsonify({"message": "Parking created", "id": new_parking.id}), 201
+        return (
+            jsonify({"message": "Parking created", "id": new_parking.id}),
+            201,
+        )
 
     @app.route("/client_parkings", methods=["POST"])
     def check_in():
@@ -77,7 +83,9 @@ def create_app():
             return jsonify({"error": "No available places"}), 400
 
         new_log_in = ClientParking(
-            client_id=client.id, parking_id=parking_obj.id, time_in=datetime.now()
+            client_id=client.id,
+            parking_id=parking_obj.id,
+            time_in=datetime.now(),
         )
 
         parking_obj.count_available_places -= 1
@@ -97,7 +105,9 @@ def create_app():
         parking_id = data.get("parking_id")
 
         log_entry = (
-            ClientParking.query.filter_by(client_id=client_id, parking_id=parking_id)
+            ClientParking.query.filter_by(
+                client_id=client_id, parking_id=parking_id
+            )
             .filter(ClientParking.time_out is None)
             .first()
         )
@@ -114,7 +124,9 @@ def create_app():
 
         log_entry.time_out = datetime.now()
 
-        duration_seconds = int((log_entry.time_out - log_entry.time_in).total_seconds())
+        duration_seconds = int(
+            (log_entry.time_out - log_entry.time_in).total_seconds()
+        )
         duration_hours = duration_seconds / 3600
 
         rate_per_hour = 2.0

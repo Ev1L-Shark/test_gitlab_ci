@@ -33,7 +33,10 @@ def setup_data(app):
     db.session.add(client_obj)
 
     parking_obj = Parking(
-        address="123 Main St", opened=True, count_places=10, count_available_places=10
+        address="123 Main St",
+        opened=True,
+        count_places=10,
+        count_available_places=10,
     )
     db.session.add(parking_obj)
     db.session.commit()

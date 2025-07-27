@@ -36,7 +36,8 @@ def test_check_in(client, setup_data):
     client_id = setup_data["client"].id
 
     response = client.post(
-        "/client_parkings", json={"client_id": client_id, "parking_id": parking_id}
+        "/client_parkings",
+        json={"client_id": client_id, "parking_id": parking_id},
     )
     assert (
         response.status_code == 200
@@ -54,7 +55,8 @@ def test_check_out(client, setup_data):
     client_id = setup_data["client"].id
 
     response = client.delete(
-        "/client_parkings", json={"client_id": client_id, "parking_id": parking_id}
+        "/client_parkings",
+        json={"client_id": client_id, "parking_id": parking_id},
     )
 
     assert (
