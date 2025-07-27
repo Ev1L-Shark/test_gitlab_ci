@@ -43,28 +43,28 @@ def test_check_in(client, setup_data):
         'client_id': client_id,
         'parking_id': parking_id
     })
-    assert response.status_code == 200 or response.status_code == 400 or response.status_code == 500
+    assert (response.status_code == 200 or
+            response.status_code == 400 or
+            response.status_code == 500)
 
     if response.status_code == 200:
         data = response.get_json()
-        assert 'message' in data and data['message'] == 'Check-in successful'
+        assert ('message' in data and
+                data['message'] == 'Check-in successful')
 
 
 def test_check_out(client, setup_data):
-    # Выезд клиента с парковки (если есть активная сессия)
     parking_id = setup_data['parking'].id
     client_id = setup_data['client'].id
 
-    # Предварительно заезжаем клиента (если еще не заехал)
-    # Для этого можно вызвать API или напрямую создать лог в базе (зависит от теста)
-
-    # Попытка выезда (предполагается, что есть активная сессия)
     response = client.delete('/client_parkings', json={
         'client_id': client_id,
         'parking_id': parking_id
     })
 
-    assert response.status_code == 200 or response.status_code == 400 or response.status_code == 500
+    assert (response.status_code == 200 or
+            response.status_code == 400 or
+            response.status_code == 500)
 
     if response.status_code == 200:
         data = response.get_json()

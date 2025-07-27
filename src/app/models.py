@@ -12,7 +12,8 @@ class Client(db.Model):
     parkings = db.relationship('ClientParking', back_populates='client')
 
     def __repr__(self):
-        return f"{self.id}, {self.name}, {self.surname}, {self.credit_card}, {self.car_number}"
+        return (f"{self.id}, {self.name}, "
+                f"{self.surname}, {self.credit_card}, {self.car_number}")
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -29,7 +30,8 @@ class Parking(db.Model):
     clients = db.relationship('ClientParking', back_populates='parking')
 
     def __repr__(self):
-        return f"{self.id}, {self.address}, {self.opened}, {self.count_places}, {self.count_available_places}"
+        return (f"{self.id}, {self.address}, {self.opened}, "
+                f"{self.count_places}, {self.count_available_places}")
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
@@ -48,11 +50,13 @@ class ClientParking(db.Model):
     parking = db.relationship('Parking', back_populates='clients')
 
     __table_args__ = (
-        db.UniqueConstraint('client_id', 'parking_id', name='unique_client_parking'),
+        db.UniqueConstraint('client_id', 'parking_id',
+                            name='unique_client_parking'),
     )
 
     def __repr__(self):
-        return f"{self.id}, {self.client_id}, {self.parking_id}, {self.time_in}, {self.time_out}"
+        return (f"{self.id}, {self.client_id}, "
+                f"{self.parking_id}, {self.time_in}, {self.time_out}")
 
     def to_json(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

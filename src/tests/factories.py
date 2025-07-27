@@ -13,7 +13,9 @@ class ClientFactory(factory.alchemy.SQLAlchemyModelFactory):
     name = factory.Faker('first_name')
     surname = factory.Faker('last_name')
     credit_card = factory.Maybe(
-        factory.Faker('boolean'), yes_declaration=fake.credit_card_number(), no_declaration=None
+        factory.Faker('boolean'),
+        yes_declaration=fake.credit_card_number(),
+        no_declaration=None
     )
     car_number = factory.Faker('bothify', text='??###')
 

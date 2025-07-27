@@ -1,4 +1,3 @@
-import pytest
 from src.tests.factories import ClientFactory, ParkingFactory
 
 

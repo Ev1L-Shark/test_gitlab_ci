@@ -60,7 +60,8 @@ def create_app():
         )
         db.session.add(new_parking)
         db.session.commit()
-        return jsonify({'message': 'Parking created', 'id': new_parking.id}), 201
+        return jsonify({'message': 'Parking created',
+                        'id': new_parking.id}), 201
 
     @app.route('/client_parkings', methods=['POST'])
     def check_in():
@@ -98,8 +99,9 @@ def create_app():
         client_id = data.get('client_id')
         parking_id = data.get('parking_id')
 
-        log_entry = ClientParking.query.filter_by(client_id=client_id, parking_id=parking_id).filter(
-            ClientParking.time_out == None).first()
+        log_entry = ClientParking.query.filter_by(
+            client_id=client_id, parking_id=parking_id).filter(
+            ClientParking.time_out is None).first()
 
         if not log_entry:
             return jsonify({'error': 'No active parking session found'}), 400
@@ -113,7 +115,8 @@ def create_app():
 
         log_entry.time_out = datetime.now()
 
-        duration_seconds = int((log_entry.time_out - log_entry.time_in).total_seconds())
+        duration_seconds = int(
+            (log_entry.time_out - log_entry.time_in).total_seconds())
         duration_hours = duration_seconds / 3600
 
         rate_per_hour = 2.0
