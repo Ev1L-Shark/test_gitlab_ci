@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 
-from src.app.models import Client, Parking, ClientParking
+from src.app.models import Client, ClientParking, Parking
 
 from . import db
 
