@@ -38,7 +38,7 @@ jobs:
       - name: Check black formatting
         run: |
           source venv/bin/activate
-          black --check src/
+          black --check -l 79 src/
 
       - name: Run mypy type checks
         run: |
