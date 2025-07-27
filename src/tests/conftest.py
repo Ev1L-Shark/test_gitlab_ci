@@ -9,7 +9,7 @@ from src.app.main import Client, ClientParking, Parking, create_app, db
 def app():
     app = create_app()
 
-    app.config['TESTING'] = True
+    app.config["TESTING"] = True
     with app.app_context():
         db.create_all()
         yield app
@@ -25,18 +25,15 @@ def client(app):
 @pytest.fixture
 def setup_data(app):
     client_obj = Client(
-        name='John',
-        surname='Doe',
-        credit_card='1234-5678-9012-3456',
-        car_number='ABC123'
+        name="John",
+        surname="Doe",
+        credit_card="1234-5678-9012-3456",
+        car_number="ABC123",
     )
     db.session.add(client_obj)
 
     parking_obj = Parking(
-        address='123 Main St',
-        opened=True,
-        count_places=10,
-        count_available_places=10
+        address="123 Main St", opened=True, count_places=10, count_available_places=10
     )
     db.session.add(parking_obj)
     db.session.commit()
@@ -44,13 +41,14 @@ def setup_data(app):
     log_in = ClientParking(
         client_id=client_obj.id,
         parking_id=parking_obj.id,
-        time_in=datetime.now() - timedelta(hours=2))
+        time_in=datetime.now() - timedelta(hours=2),
+    )
     parking_obj.count_available_places -= 1
     db.session.add(log_in)
     db.session.commit()
 
     return {
-        'client': client_obj,
-        'parking': parking_obj,
-        'log_in': log_in,
+        "client": client_obj,
+        "parking": parking_obj,
+        "log_in": log_in,
     }
