@@ -43,6 +43,7 @@ jobs:
       - name: Run mypy type checks
         run: |
           source venv/bin/activate
+          pip install types-flask types-flask-sqlalchemy types-factory-boy types-faker
           mypy src/
 
       - name: Run tests with pytest
