@@ -1,6 +1,7 @@
 import factory
 from faker import Faker
-from src.app.main import db, Client, Parking
+
+from src.app.main import Client, Parking, db
 
 fake = Faker()
 

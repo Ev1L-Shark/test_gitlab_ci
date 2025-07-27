@@ -1,6 +1,7 @@
-import pytest
-from src.app.main import create_app, db, Client, Parking, ClientParking
 from datetime import datetime, timedelta
+
+import pytest
+from src.app.main import Client, ClientParking, Parking, create_app, db
 
 
 @pytest.fixture

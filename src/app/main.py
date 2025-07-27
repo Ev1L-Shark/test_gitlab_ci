@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify
 from datetime import datetime
-from . import db
+
+from flask import Flask, request, jsonify
+
 from src.app.models import Client, Parking, ClientParking
+
+from . import db
 
 
 def create_app():
