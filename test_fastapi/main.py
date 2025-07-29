@@ -2,12 +2,11 @@ from typing import Annotated
 
 import uvicorn
 from database import Base, engine, get_db
+from fastapi import Depends, FastAPI, HTTPException
 from models import RecipeModel
 from schemas import RecipeListResponse, RecipeResponse, RecipeSchema
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-
-from fastapi import Depends, FastAPI, HTTPException
 
 app = FastAPI(title="CookBook API", version="1")
 SessionDep = Annotated[AsyncSession, Depends(get_db)]
