@@ -28,25 +28,25 @@ jobs:
       - name: Run flake8 linter
         run: |
           source venv/bin/activate
-          flake8 fast-API/
+          flake8 fastapi/
 
       - name: Check isort formatting
         run: |
           source venv/bin/activate
-          isort --check-only --diff fast-API/
+          isort --check-only --diff fastapi/
 
       - name: Check black formatting
         run: |
           source venv/bin/activate
-          black --check -l 79 fast-API/
+          black --check -l 79 fastapi/
 
       - name: Run mypy type checks
         run: |
           source venv/bin/activate
-          mypy fast-API/
+          mypy fastapi/
 
 #      - name: Run tests with pytest
 #        run: |
 #          source venv/bin/activate
 #          pip install -r requirements.txt
-#          pytest fast-API//tests/
+#          pytest fastapi//tests/
